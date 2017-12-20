@@ -8,20 +8,25 @@ import string
 alphas = string.ascii_letters + '_'
 nums = string.digits
 
-print('Welcome to the Identifier Checker v1.0')
-print('Testees must be at least 2 chars long.')
-myInput = input('Identifier to test?')
+print('欢迎进行标识符测试。\n')
+print('''标识符至少为2位,可使用数字、字母、下划线;\n首位只能是字母（推荐小写）或下划线;\n不能使用python关键字。
+    ''')
 
-if len(myInput) > 1:
+myInput = True
 
-    if myInput[0] not in alphas:
-        print('''invalid:first symbol must be alphabetic''')
-    else:
-        for otherChar in myInput[1:]:
-
-            if otherChar not in string.printable:
-                print('''invalid:remaining symbols must be alphanumeric''')
-                break
-
+while myInput != 'q':
+    myInput = input('请输入要测试的标识符或输入‘q’退出测试: ')
+    if myInput != 'q':
+        if len(myInput) > 1:
+            if myInput[0] not in alphas:
+                print('''无效：首位必须为字母''')
+            else:
+                for otherChar in myInput[1:]:
+                    if otherChar not in string.printable:
+                        print('无效：除首位外，其余位需为字母及数字')
+                else:
+                    print('合格的标识符')
         else:
-            print('okay as an identifier')
+            print('无效：标识符至少为2位')
+else:
+    print("测试结束。")
