@@ -4,6 +4,7 @@
 """标识符检查"""
 
 import string
+import keyword
 
 alphas = string.ascii_letters + '_'
 nums = string.digits
@@ -19,13 +20,16 @@ while myInput != 'q':
     if myInput != 'q':
         if len(myInput) > 1:
             if myInput[0] not in alphas:
-                print('''无效：首位必须为字母''')
+                print('无效：首位必须为字母')
             else:
                 for otherChar in myInput[1:]:
                     if otherChar not in string.printable:
                         print('无效：除首位外，其余位需为字母及数字')
                 else:
-                    print('合格的标识符')
+                    if myInput in keyword.kwlist:
+                        print('不能是内置关键字.')
+                    else:
+                        print('合格的标识符')
         else:
             print('无效：标识符至少为2位')
 else:
